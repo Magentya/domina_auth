@@ -1,6 +1,7 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { User } from './models/user.entity';
 
+import { User } from './models/user.entity';
+import { Task } from './models/task.entity';
 import env from '../env';
 
 export const databaseOptions: TypeOrmModuleOptions = {
@@ -11,7 +12,7 @@ export const databaseOptions: TypeOrmModuleOptions = {
   password: env.bd_pass,
   database: env.bd_name,
   synchronize: true,
-  entities: [User],
+  entities: [User, Task],
 };
 
 /* docker run --name DOMINA -e POSTGRES_PASSWORD=mysecretpassword -e POSTGRES_DB=developer -d -p 5432:5432 postgres */
