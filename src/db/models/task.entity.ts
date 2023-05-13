@@ -11,6 +11,11 @@ export class Task extends Base {
   @Column({ type: 'varchar' })
   description: string;
 
-  @ManyToOne(() => User, (user) => user.tasks, {})
+  @Column({ type: 'boolean', default: false })
+  completed: boolean;
+
+  @ManyToOne(() => User, (user) => user.tasks, {
+    nullable: false,
+  })
   user: User;
 }

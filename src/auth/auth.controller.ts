@@ -3,8 +3,10 @@ import { Get, Request, UseGuards } from '@nestjs/common';
 import { HttpException } from '@nestjs/common';
 import { to } from 'await-to-js';
 import { UseZodGuard } from 'nestjs-zod';
-import { IGeneralResponse } from '../utils/general_types';
+import { MessagePattern } from '@nestjs/microservices';
+import { JwtService } from '@nestjs/jwt';
 
+import { IGeneralResponse } from '../utils/general_types';
 import { AuthService } from './auth.service';
 import { LoginSchema } from './auth.zod';
 import { LoginDto } from './auth.dto';
@@ -12,7 +14,10 @@ import { JwtAuthGuard } from './jwt.guard';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly jwtService: JwtService,
+  ) {}
 
   @Post('login')
   @HttpCode(HttpStatus.OK)
@@ -46,5 +51,15 @@ export class AuthController {
       message: 'Get profile successfully',
       data: req.user,
     };
+  }
+
+  @MessagePattern({ cmd: 'validate-token' })
+  validateToken(data: string): boolean {
+    try {
+      this.jwtService.verify(data);
+      return true;
+    } catch (error) {
+      return false;
+    }
   }
 }

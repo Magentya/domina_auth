@@ -8,7 +8,7 @@ import { Logger } from '@nestjs/common';
 import env from './env';
 
 async function bootstrap() {
-  const { port } = env;
+  const { port, redis } = env;
   const logger = new Logger();
   const app = await NestFactory.create(AppModule, { cors: { origin: '*' } });
   // configs
@@ -20,15 +20,16 @@ async function bootstrap() {
     }),
   );
 
-  app.connectMicroservice({
-    tranport: Transport.TCP,
-    options: {
-      host: 'localhost',
-      port: 3001,
-    },
-  });
+  if (redis) {
+    app.connectMicroservice({
+      transport: Transport.REDIS,
+      options: {
+        url: redis,
+      },
+    });
 
-  await app.startAllMicroservices();
+    await app.startAllMicroservices();
+  }
 
   // start app
   await app.listen(port);
