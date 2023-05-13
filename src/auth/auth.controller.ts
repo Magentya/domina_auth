@@ -1,37 +1,33 @@
-import { Body, Controller, Post } from '@nestjs/common';
-import { Get, Request, UseGuards } from '@nestjs/common/decorators';
-import { HttpException } from '@nestjs/common/exceptions/http.exception';
-import { ApiBearerAuth } from '@nestjs/swagger/dist/decorators/api-bearer.decorator';
-import { ApiBody } from '@nestjs/swagger/dist/decorators/api-body.decorator';
-import { ApiTags } from '@nestjs/swagger/dist/decorators/api-use-tags.decorator';
+import { Body, Controller, HttpStatus, Post, HttpCode } from '@nestjs/common';
+import { Get, Request, UseGuards } from '@nestjs/common';
+import { HttpException } from '@nestjs/common';
 import { to } from 'await-to-js';
 import { UseZodGuard } from 'nestjs-zod';
-import { IGeneralResponse } from 'src/utils/general_types';
+import { IGeneralResponse } from '../utils/general_types';
 
 import { AuthService } from './auth.service';
-import { LoginDto, LoginSchema } from './auth.zod';
+import { LoginSchema } from './auth.zod';
+import { LoginDto } from './auth.dto';
 import { JwtAuthGuard } from './jwt.guard';
 
 @Controller('auth')
-@ApiTags('auth router')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('login')
-  @ApiBody({ type: LoginDto })
+  @HttpCode(HttpStatus.OK)
   @UseZodGuard('body', LoginSchema)
-  async login(@Body() body: LoginDto): Promise<IGeneralResponse> {
+  async login(@Body() data: LoginDto): Promise<IGeneralResponse> {
     const [err, auth] = await to(
-      this.authService.login(body.mail, body.password),
+      this.authService.login(data.mail, data.password),
     );
 
     if (err) {
       throw new HttpException(
         {
-          status: 400,
           error: err.message,
         },
-        400,
+        HttpStatus.BAD_REQUEST,
       );
     }
 
@@ -43,12 +39,11 @@ export class AuthController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get('profile')
-  @ApiBearerAuth('accessToken')
+  @Get('me')
   getProfile(@Request() req): IGeneralResponse {
     return {
       status: 200,
-      message: 'Login successfully',
+      message: 'Get profile successfully',
       data: req.user,
     };
   }
