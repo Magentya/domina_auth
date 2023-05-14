@@ -9,6 +9,9 @@ export class Task extends Base {
   id: number;
 
   @Column({ type: 'varchar' })
+  title: string;
+
+  @Column({ type: 'varchar' })
   description: string;
 
   @Column({ type: 'boolean', default: false })
