@@ -1,73 +1,71 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Domina
+###### _Muchas gracias por la oportunidad 😊_
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+##
+## Problematica a resolver
+Diseñe una aplicación con arquitectura orientada a micro servicios que permita gestionar la información del usuario y sus tareas:
+Los artefactos a construir serán los siguientes:
+1. Un micro servicio que permita el registro del usuario y posteriormente la autenticación (básica) del mismo en NODE.
+2. Un micro servicio que provee las funcionalidades de crear, actualizar y eliminar las tareas de un usuario en NODE.
+3. Desarrolle las interfaces de usuario que permita la captura y la visualización de datos en el lenguaje de preferencia por usted. (Preferiblemente REACT).
+4. Puede trabajar con el gestor de base de datos de su preferencia
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Requisitos
+- node 18.16.0 (Version lts actual)
+- Docker
+- CMD
+- Editor de textos de preferencia
 
-## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+La mayoria de datos de conexion o variables de entorno estan quemadas con el fin de facilitar las pruebas del desarrollo.
+
+## Tecnologias y/o frameworks
+### Front
+- React
+### Back
+- Nestjs
+- zod
+- typeorm
+- redis
+
+#
 
 ## Installation
 
-```bash
-$ npm install
+Luego de descargar los 3 repositorios nos ubicamos en la carpeta raiz de cada proyecto y ejecutamos
+
+```sh
+npm i
+```
+Para descargar los paquetes y librerias que requiere cada proyecto
+
+Los proyectos comparten un archivo llamado _docker-compose.yml_ el cual nos proporciona la configuracion de 2 contenedores para el funcionamiento del proyecto
+- redis para la conexion entre micros
+- postgres como base de datos
+
+con el comando
+
+```sh
+docker-compose up -d
 ```
 
-## Running the app
+ejecutamos los contenedores
 
-```bash
-# development
-$ npm run start
+luego en cada proyecto ejecutamos:
 
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+**domina_task**
+```sh
+npm run start:dev
 ```
 
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+**domina_auth**
+```sh
+npm run start:dev
 ```
 
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+**domina_front**
+```sh
+npm run dev
+```
+***
+Tambien les comparto entre los archivos la coleccion de postman
