@@ -17,7 +17,7 @@ Los artefactos a construir serán los siguientes:
 - Editor de textos de preferencia
 
 
-La mayoria de datos de conexion o variables de entorno estan quemadas con el fin de facilitar las pruebas del desarrollo.
+La mayoría de datos de conexión o variables de entorno están quemadas con el fin de facilitar las pruebas del desarrollo.
 
 ## Tecnologias y/o frameworks
 ### Front
@@ -30,28 +30,28 @@ La mayoria de datos de conexion o variables de entorno estan quemadas con el fin
 
 #
 
-## Installation
+## Instalación
 
-Luego de descargar los 3 repositorios nos ubicamos en la carpeta raiz de cada proyecto y ejecutamos
+Luego de descargar los 3 repositorios nos ubicamos en la carpeta raíz de cada proyecto y ejecutamos
 
 ```sh
 npm i
 ```
-Para descargar los paquetes y librerias que requiere cada proyecto
+Para descargar los paquetes y librerías que requiere cada proyecto
 
-Los proyectos comparten un archivo llamado _docker-compose.yml_ el cual nos proporciona la configuracion de 2 contenedores para el funcionamiento del proyecto
+Los proyectos comparten un archivo llamado _docker-compose.yml_ el cual nos proporciona la configuración de 2 contenedores para el funcionamiento del proyecto
 - redis para la conexion entre micros
 - postgres como base de datos
 
-con el comando
+Con el comando
 
 ```sh
 docker-compose up -d
 ```
 
-ejecutamos los contenedores
+Ejecutamos los contenedores
 
-luego en cada proyecto ejecutamos:
+Luego en cada proyecto ejecutamos:
 
 **domina_task**
 ```sh
@@ -68,4 +68,4 @@ npm run start:dev
 npm run dev
 ```
 ***
-Tambien les comparto entre los archivos la coleccion de postman
+También les comparto entre los archivos la colección de postman
